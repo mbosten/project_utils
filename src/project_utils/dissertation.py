@@ -119,4 +119,4 @@ def apply_bar_hatches(bars):
         bar.set_linewidth(0.8)
 
 
-__all__ = ["use_theme", "polish_axes"]
+__all__ = ["use_theme", "polish_axes", "apply_bar_hatches"]
