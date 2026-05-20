@@ -4,20 +4,26 @@ from __future__ import annotations
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
-COLORBLIND_PALETTE = [
-    "#0072B2",  # blue
-    "#D55E00",  # vermillion
-    "#009E73",  # green
-    "#CC79A7",  # purple/pink
-    "#E69F00",  # orange
-    "#56B4E9",  # sky blue
-    "#F0E442",  # yellow
-    "#000000",  # black
+CYBER_AI_PALETTE = [
+    "#00E5FF",  # electric cyan
+    "#7C4DFF",  # neural violet
+    "#00C853",  # signal green
+    "#FFB300",  # anomaly amber
+    "#FF5252",  # alert coral
+    "#2979FF",  # deep blue
+    "#D500F9",  # magenta
+    "#263238",  # graphite
 ]
 
 MARKERS = ["o", "x", "^", "s", "D", "v", "P", "*"]
+LINESTYLES = ["-", "--", "-.", ":", (0, (5, 1)), (0, (3, 1, 1, 1)), (0, (1, 1)), "-"]
+BAR_HATCHES = ["", "///", "\\\\\\", "xx", "--", "++", "..", "**"]
 
-LINESTYLE_CYCLE = mpl.cycler(color=COLORBLIND_PALETTE) + mpl.cycler(marker=MARKERS)
+LINESTYLE_CYCLE = (
+    mpl.cycler(color=CYBER_AI_PALETTE)
+    + mpl.cycler(marker=MARKERS)
+    + mpl.cycler(linestyle=LINESTYLES)
+)
 
 THEMES = {
     "dissertation": {
@@ -104,6 +110,13 @@ def polish_axes(ax, title=None, xlabel=None, ylabel=None):
 
     ax.legend(frameon=False)
     return ax
+
+
+def apply_bar_hatches(bars):
+    for bar, hatch in zip(bars, BAR_HATCHES):
+        bar.set_hatch(hatch)
+        bar.set_edgecolor("black")
+        bar.set_linewidth(0.8)
 
 
 __all__ = ["use_theme", "polish_axes"]
