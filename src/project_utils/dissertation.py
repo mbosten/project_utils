@@ -4,6 +4,21 @@ from __future__ import annotations
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
+COLORBLIND_PALETTE = [
+    "#0072B2",  # blue
+    "#D55E00",  # vermillion
+    "#009E73",  # green
+    "#CC79A7",  # purple/pink
+    "#E69F00",  # orange
+    "#56B4E9",  # sky blue
+    "#F0E442",  # yellow
+    "#000000",  # black
+]
+
+MARKERS = ["o", "x", "^", "s", "D", "v", "P", "*"]
+
+LINESTYLE_CYCLE = mpl.cycler(color=COLORBLIND_PALETTE) + mpl.cycler(marker=MARKERS)
+
 THEMES = {
     "dissertation": {
         "font.family": "serif",
@@ -24,10 +39,7 @@ THEMES = {
         "lines.linewidth": 1.8,
         "lines.markersize": 5,
         "figure.figsize": (5.2, 3.4),
-        "axes.prop_cycle": mpl.cycler(color=[
-            "#1B365D", "#7A5195", "#2A9D8F", "#E76F51",
-            "#6C757D", "#B08968", "#4D908E"
-        ]),
+        "axes.prop_cycle": LINESTYLE_CYCLE,
     },
 
     "cyber_dark": {
@@ -46,10 +58,7 @@ THEMES = {
         "grid.alpha": 0.7,
         "lines.linewidth": 2.0,
         "figure.figsize": (5.2, 3.4),
-        "axes.prop_cycle": mpl.cycler(color=[
-            "#58A6FF", "#3FB950", "#F778BA", "#D29922",
-            "#A371F7", "#FF7B72", "#79C0FF"
-        ]),
+        "axes.prop_cycle": LINESTYLE_CYCLE,
     },
 
     "topology_minimal": {
@@ -68,10 +77,7 @@ THEMES = {
         "legend.frameon": False,
         "lines.linewidth": 1.9,
         "figure.figsize": (5.2, 3.4),
-        "axes.prop_cycle": mpl.cycler(color=[
-            "#264653", "#2A9D8F", "#E9C46A", "#F4A261",
-            "#E76F51", "#8AB17D", "#577590"
-        ]),
+        "axes.prop_cycle": LINESTYLE_CYCLE,
     },
 }
 
@@ -91,6 +97,11 @@ def polish_axes(ax, title=None, xlabel=None, ylabel=None):
         ax.set_xlabel(xlabel)
     if ylabel:
         ax.set_ylabel(ylabel)
+
+    for line in ax.get_lines():
+        line.set_markevery(18)
+        line.set_markeredgewidth(1.2)
+
     ax.legend(frameon=False)
     return ax
 
