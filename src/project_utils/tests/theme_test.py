@@ -81,5 +81,10 @@ for row, theme in enumerate(themes):
         ax.set_title(f"{theme}: Pie chart")
         ax.set_aspect("equal")
 
+fig.savefig( "theme_showcase.png", dpi=300, bbox_inches="tight", ) 
+
+fig.savefig( "theme_showcase.pdf", bbox_inches="tight", )
+
+
 plt.show()
 
