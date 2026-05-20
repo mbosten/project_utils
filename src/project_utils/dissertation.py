@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-
+import colorsys
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
-CYBER_AI_PALETTE = [
+DARK_CYBER_AI_PALETTE = [
     "#00E5FF",  # electric cyan
     "#7C4DFF",  # neural violet
     "#00C853",  # signal green
@@ -15,12 +15,48 @@ CYBER_AI_PALETTE = [
     "#263238",  # graphite
 ]
 
+def darken_hex(hex_color, factor=0.72, saturation_factor=0.9):
+    """
+    Create a darker/more print-friendly version of a color.
+    factor < 1 darkens.
+    """
+
+    hex_color = hex_color.lstrip("#")
+
+    r = int(hex_color[0:2], 16) / 255
+    g = int(hex_color[2:4], 16) / 255
+    b = int(hex_color[4:6], 16) / 255
+
+    h, l, s = colorsys.rgb_to_hls(r, g, b)
+
+    l *= factor
+    s *= saturation_factor
+
+    r, g, b = colorsys.hls_to_rgb(h, l, s)
+
+    return "#{:02X}{:02X}{:02X}".format(
+        int(r * 255),
+        int(g * 255),
+        int(b * 255),
+    )
+
+
+LIGHT_CYBER_AI_PALETTE = [
+    darken_hex(c) for c in DARK_CYBER_AI_PALETTE
+]
+
 MARKERS = ["o", "x", "^", "s", "D", "v", "P", "*"]
 LINESTYLES = ["-", "--", "-.", ":", (0, (5, 1)), (0, (3, 1, 1, 1)), (0, (1, 1)), "-"]
 BAR_HATCHES = ["", "///", "\\\\\\", "xx", "--", "++", "..", "**"]
 
-LINESTYLE_CYCLE = (
-    mpl.cycler(color=CYBER_AI_PALETTE)
+LIGHT_PROP_CYCLE = (
+    mpl.cycler(color=LIGHT_CYBER_AI_PALETTE)
+    + mpl.cycler(marker=MARKERS)
+    + mpl.cycler(linestyle=LINESTYLES)
+)
+
+DARK_PROP_CYCLE = (
+    mpl.cycler(color=DARK_CYBER_AI_PALETTE)
     + mpl.cycler(marker=MARKERS)
     + mpl.cycler(linestyle=LINESTYLES)
 )
@@ -45,7 +81,7 @@ THEMES = {
         "lines.linewidth": 1.8,
         "lines.markersize": 5,
         "figure.figsize": (5.2, 3.4),
-        "axes.prop_cycle": LINESTYLE_CYCLE,
+        "axes.prop_cycle": LIGHT_PROP_CYCLE,
     },
 
     "cyber_dark": {
@@ -64,7 +100,7 @@ THEMES = {
         "grid.alpha": 0.7,
         "lines.linewidth": 2.0,
         "figure.figsize": (5.2, 3.4),
-        "axes.prop_cycle": LINESTYLE_CYCLE,
+        "axes.prop_cycle": DARK_PROP_CYCLE,
     },
 
     "topology_minimal": {
@@ -83,7 +119,7 @@ THEMES = {
         "legend.frameon": False,
         "lines.linewidth": 1.9,
         "figure.figsize": (5.2, 3.4),
-        "axes.prop_cycle": LINESTYLE_CYCLE,
+        "axes.prop_cycle": LIGHT_PROP_CYCLE,
     },
 }
 
