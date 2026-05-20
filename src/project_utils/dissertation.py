@@ -132,6 +132,17 @@ THEMES = {
 
 
 def use_theme(name="dissertation"):
+    """
+    Apply a predefined Matplotlib theme by updating global rcParams.
+
+    The selected theme affects all figures created afterward and should
+    therefore be applied before creating figures or subplots.
+
+    Example
+    -------
+    >>> use_theme("dissertation")
+    >>> fig, ax = plt.subplots()
+    """
     if name not in THEMES:
         raise ValueError(f"Unknown theme: {name}. Choose from {list(THEMES)}")
 
@@ -140,6 +151,17 @@ def use_theme(name="dissertation"):
 
 
 def polish_axes(ax, title=None, xlabel=None, ylabel=None):
+    """
+    Apply consistent styling, labels, and legend formatting to an axes object.
+
+    Also adjusts line marker visibility for improved readability.
+
+    Example
+    -------
+    >>> fig, ax = plt.subplots()
+    >>> ax.plot(x, y, label="Signal")
+    >>> polish_axes(ax, title="Example", xlabel="Time", ylabel="Value")
+    """
     if title:
         ax.set_title(title, pad=8)
     if xlabel:
@@ -156,10 +178,20 @@ def polish_axes(ax, title=None, xlabel=None, ylabel=None):
 
 
 def apply_bar_hatches(bars):
+    """
+    Apply hatch patterns and edge styling to bar plot elements.
+
+    Useful for improving distinction in print and grayscale figures.
+
+    Example
+    -------
+    >>> bars = ax.bar(labels, values)
+    >>> apply_bar_hatches(bars)
+    """
     for bar, hatch in zip(bars, BAR_HATCHES):
         bar.set_hatch(hatch)
         bar.set_edgecolor("black")
         bar.set_linewidth(0.8)
 
 
-__all__ = ["use_theme", "polish_axes", "apply_bar_hatches"]
+__all__ = ["use_theme", "THEMES", "polish_axes", "apply_bar_hatches"]
