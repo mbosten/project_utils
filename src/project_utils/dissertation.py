@@ -150,7 +150,13 @@ def use_theme(name="dissertation"):
     mpl.rcParams.update(THEMES[name])
 
 
-def polish_axes(ax, title=None, xlabel=None, ylabel=None):
+def polish_axes(
+    ax,
+    title=None,
+    xlabel=None,
+    ylabel=None,
+    legend=True,
+):
     """
     Apply consistent styling, labels, and legend formatting to an axes object.
 
@@ -162,10 +168,13 @@ def polish_axes(ax, title=None, xlabel=None, ylabel=None):
     >>> ax.plot(x, y, label="Signal")
     >>> polish_axes(ax, title="Example", xlabel="Time", ylabel="Value")
     """
+
     if title:
         ax.set_title(title, pad=8)
+
     if xlabel:
         ax.set_xlabel(xlabel)
+
     if ylabel:
         ax.set_ylabel(ylabel)
 
@@ -173,7 +182,9 @@ def polish_axes(ax, title=None, xlabel=None, ylabel=None):
         line.set_markevery(18)
         line.set_markeredgewidth(1.2)
 
-    ax.legend(frameon=False)
+    if legend:
+        ax.legend(frameon=False)
+
     return ax
 
 
