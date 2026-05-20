@@ -90,3 +90,6 @@ def polish_axes(ax, title=None, xlabel=None, ylabel=None):
         ax.set_ylabel(ylabel)
     ax.legend(frameon=False)
     return ax
+
+
+__all__ = ["use_theme", "polish_axes"]

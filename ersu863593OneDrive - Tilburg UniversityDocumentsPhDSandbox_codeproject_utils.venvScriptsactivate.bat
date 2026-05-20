@@ -1,0 +1,105 @@
+[33mcommit 27baf6b83cb6dfa3c29b711f67080c77ff399f1d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: mbosten <85393300+mbosten@users.noreply.github.com>
+Date:   Wed May 20 08:30:03 2026 +0200
+
+    add disseration themes
+
+[1mdiff --git a/src/project_utils/dissertation.py b/src/project_utils/dissertation.py[m
+[1mnew file mode 100644[m
+[1mindex 0000000..5c541cd[m
+[1m--- /dev/null[m
+[1m+++ b/src/project_utils/dissertation.py[m
+[36m@@ -0,0 +1,92 @@[m
+[32m+[m[32mimport matplotlib as mpl[m
+[32m+[m[32mimport matplotlib.pyplot as plt[m
+[32m+[m
+[32m+[m[32mTHEMES = {[m
+[32m+[m[32m    "dissertation": {[m
+[32m+[m[32m        "font.family": "serif",[m
+[32m+[m[32m        "font.serif": ["STIX Two Text", "Times New Roman", "DejaVu Serif"],[m
+[32m+[m[32m        "mathtext.fontset": "stix",[m
+[32m+[m[32m        "figure.dpi": 120,[m
+[32m+[m[32m        "savefig.dpi": 300,[m
+[32m+[m[32m        "savefig.bbox": "tight",[m
+[32m+[m[32m        "axes.titlesize": 12,[m
+[32m+[m[32m        "axes.labelsize": 10,[m
+[32m+[m[32m        "xtick.labelsize": 9,[m
+[32m+[m[32m        "ytick.labelsize": 9,[m
+[32m+[m[32m        "legend.fontsize": 9,[m
+[32m+[m[32m        "axes.linewidth": 0.8,[m
+[32m+[m[32m        "axes.grid": True,[m
+[32m+[m[32m        "grid.alpha": 0.25,[m
+[32m+[m[32m        "grid.linewidth": 0.6,[m
+[32m+[m[32m        "lines.linewidth": 1.8,[m
+[32m+[m[32m        "lines.markersize": 5,[m
+[32m+[m[32m        "figure.figsize": (5.2, 3.4),[m
+[32m+[m[32m        "axes.prop_cycle": mpl.cycler(color=[[m
+[32m+[m[32m            "#1B365D", "#7A5195", "#2A9D8F", "#E76F51",[m
+[32m+[m[32m            "#6C757D", "#B08968", "#4D908E"[m
+[32m+[m[32m        ]),[m
+[32m+[m[32m    },[m
+[32m+[m
+[32m+[m[32m    "cyber_dark": {[m
+[32m+[m[32m        "font.family": "sans-serif",[m
+[32m+[m[32m        "font.sans-serif": ["Aptos", "Arial", "DejaVu Sans"],[m
+[32m+[m[32m        "figure.facecolor": "#101418",[m
+[32m+[m[32m        "axes.facecolor": "#151B22",[m
+[32m+[m[32m        "savefig.facecolor": "#101418",[m
+[32m+[m[32m        "text.color": "#EAECEF",[m
+[32m+[m[32m        "axes.labelcolor": "#EAECEF",[m
+[32m+[m[32m        "xtick.color": "#D0D7DE",[m
+[32m+[m[32m        "ytick.color": "#D0D7DE",[m
+[32m+[m[32m        "axes.edgecolor": "#8B949E",[m
+[32m+[m[32m        "axes.grid": True,[m
+[32m+[m[32m        "grid.color": "#30363D",[m
+[32m+[m[32m        "grid.alpha": 0.7,[m
+[32m+[m[32m        "lines.linewidth": 2.0,[m
+[32m+[m[32m        "figure.figsize": (5.2, 3.4),[m
+[32m+[m[32m        "axes.prop_cycle": mpl.cycler(color=[[m
+[32m+[m[32m            "#58A6FF", "#3FB950", "#F778BA", "#D29922",[m
+[32m+[m[32m            "#A371F7", "#FF7B72", "#79C0FF"[m
+[32m+[m[32m        ]),[m
+[32m+[m[32m    },[m
+[32m+[m
+[32m+[m[32m    "topology_minimal": {[m
+[32m+[m[32m        "font.family": "sans-serif",[m
+[32m+[m[32m        "font.sans-serif": ["Helvetica", "Arial", "DejaVu Sans"],[m
+[32m+[m[32m        "figure.dpi": 120,[m
+[32m+[m[32m        "savefig.dpi": 300,[m
+[32m+[m[32m        "axes.spines.top": False,[m
+[32m+[m[32m        "axes.spines.right": False,[m
+[32m+[m[32m        "axes.grid": False,[m
+[32m+[m[32m        "axes.linewidth": 0.9,[m
+[32m+[m[32m        "axes.titlesize": 12,[m
+[32m+[m[32m        "axes.labelsize": 10,[m
+[32m+[m[32m        "xtick.labelsize": 9,[m
+[32m+[m[32m        "ytick.labelsize": 9,[m
+[32m+[m[32m        "legend.frameon": False,[m
+[32m+[m[32m        "lines.linewidth": 1.9,[m
+[32m+[m[32m        "figure.figsize": (5.2, 3.4),[m
+[32m+[m[32m        "axes.prop_cycle": mpl.cycler(color=[[m
+[32m+[m[32m            "#264653", "#2A9D8F", "#E9C46A", "#F4A261",[m
+[32m+[m[32m            "#E76F51", "#8AB17D", "#577590"[m
+[32m+[m[32m        ]),[m
+[32m+[m[32m    },[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m
+[32m+[m[32mdef use_theme(name="dissertation"):[m
+[32m+[m[32m    if name not in THEMES:[m
+[32m+[m[32m        raise ValueError(f"Unknown theme: {name}. Choose from {list(THEMES)}")[m
+[32m+[m
+[32m+[m[32m    mpl.rcParams.update(mpl.rcParamsDefault)[m
+[32m+[m[32m    mpl.rcParams.update(THEMES[name])[m
+[32m+[m
+[32m+[m
+[32m+[m[32mdef polish_axes(ax, title=None, xlabel=None, ylabel=None):[m
+[32m+[m[32m    if title:[m
+[32m+[m[32m        ax.set_title(title, pad=8)[m
+[32m+[m[32m    if xlabel:[m
+[32m+[m[32m        ax.set_xlabel(xlabel)[m
+[32m+[m[32m    if ylabel:[m
+[32m+[m[32m        ax.set_ylabel(ylabel)[m
+[32m+[m[32m    ax.legend(frameon=False)[m
+[32m+[m[32m    return ax[m
+\ No newline at end of file[m
