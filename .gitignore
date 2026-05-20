@@ -24,3 +24,7 @@ Thumbs.db
 build/
 dist/
 *.egg-info/
+
+# irrelevant files
+*.png
+*.pdf
