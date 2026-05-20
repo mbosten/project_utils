@@ -42,7 +42,14 @@ def darken_hex(hex_color, factor=0.72, saturation_factor=0.9):
 
 
 LIGHT_CYBER_AI_PALETTE = [
-    darken_hex(c) for c in DARK_CYBER_AI_PALETTE
+    "#009FC2",  # refined cyan-blue
+    "#6A42E8",  # brighter neural violet
+    "#00A15B",  # brighter emerald green
+    darken_hex("#FFB300", factor=0.82),
+    darken_hex("#FF5252", factor=0.82),
+    darken_hex("#2979FF", factor=0.82),
+    darken_hex("#D500F9", factor=0.82),
+    darken_hex("#263238", factor=0.90),
 ]
 
 MARKERS = ["o", "x", "^", "s", "D", "v", "P", "*"]
