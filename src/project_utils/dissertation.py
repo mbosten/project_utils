@@ -3,6 +3,9 @@ from __future__ import annotations
 import colorsys
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import plotly.graph_objects as go
+import plotly.io as pio
+
 
 DARK_CYBER_AI_PALETTE = [
     "#00E5FF",  # electric cyan
@@ -131,7 +134,7 @@ THEMES = {
 }
 
 
-def use_theme(name="dissertation"):
+def use_theme(name="dissertation", plotly=False):
     """
     Apply a predefined Matplotlib theme by updating global rcParams.
 
@@ -148,6 +151,10 @@ def use_theme(name="dissertation"):
 
     mpl.rcParams.update(mpl.rcParamsDefault)
     mpl.rcParams.update(THEMES[name])
+
+
+    if plotly:
+        register_plotly_theme(name, set_as_default=True)
 
 
 def polish_axes(
@@ -204,5 +211,57 @@ def apply_bar_hatches(bars):
         bar.set_edgecolor("black")
         bar.set_linewidth(0.8)
 
+
+def _plotly_font_family():
+    family = mpl.rcParams.get("font.family", "serif")
+
+    if isinstance(family, list):
+        family = family[0]
+
+    if family == "serif":
+        serif_fonts = mpl.rcParams.get("font.serif", [])
+        return serif_fonts[0] if serif_fonts else "Times New Roman"
+
+    if family == "sans-serif":
+        sans_fonts = mpl.rcParams.get("font.sans-serif", [])
+        return sans_fonts[0] if sans_fonts else "Arial"
+
+    return family
+
+
+def register_plotly_theme(name="dissertation", set_as_default=True):
+    """
+    Register a Plotly template based on the currently active Matplotlib theme.
+    Call this after use_theme(...).
+    """
+
+    colors = mpl.rcParams["axes.prop_cycle"].by_key()["color"]
+
+    template_name = f"{name}_plotly"
+
+    pio.templates[template_name] = go.layout.Template(
+        layout=go.Layout(
+            font=dict(
+                family=_plotly_font_family(),
+                size=mpl.rcParams.get("font.size", 12),
+                color=mpl.rcParams.get("text.color", "black"),
+            ),
+            title=dict(
+                font=dict(
+                    family=_plotly_font_family(),
+                    size=mpl.rcParams.get("axes.titlesize", 20),
+                    color=mpl.rcParams.get("text.color", "black"),
+                )
+            ),
+            paper_bgcolor=mpl.rcParams.get("figure.facecolor", "white"),
+            plot_bgcolor=mpl.rcParams.get("axes.facecolor", "white"),
+            colorway=colors,
+        )
+    )
+
+    if set_as_default:
+        pio.templates.default = template_name
+
+    return template_name
 
 __all__ = ["use_theme", "THEMES", "polish_axes", "apply_bar_hatches"]
