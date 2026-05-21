@@ -264,4 +264,5 @@ def register_plotly_theme(name="dissertation", set_as_default=True):
 
     return template_name
 
+
 __all__ = ["use_theme", "THEMES", "polish_axes", "apply_bar_hatches"]
