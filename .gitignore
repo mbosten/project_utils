@@ -28,3 +28,8 @@ dist/
 # irrelevant files
 *.png
 *.pdf
+*.dot
+*.svg
+
+# notebooks
+*.ipynb

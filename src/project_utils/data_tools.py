@@ -14,35 +14,62 @@ def dfskimmer(df):
 
     returns a Pandas DataFrame.
     """
+
+    n_rows = len(df)
+
+    meta = pd.DataFrame({
+        "dtype": df.dtypes.astype(str),
+        "missing": df.isna().sum(),
+        "complete": df.count(),
+        "unique": df.nunique(),
+    })
+
+    # Numeric statistics in bulk
+    numeric = df.select_dtypes(include="number")
+
+    if not numeric.empty:
+        numeric_stats = pd.DataFrame({
+            "mean": numeric.mean(),
+            "std": numeric.std(),
+            "skew": numeric.skew(),
+            "kurtosis": numeric.kurt(),
+            "min": numeric.min(),
+            "p25": numeric.quantile(0.25),
+            "median": numeric.median(),
+            "p75": numeric.quantile(0.75),
+            "p99": numeric.quantile(0.99),
+            "max": numeric.max(),
+        })
+    else:
+        numeric_stats = pd.DataFrame()
+
     rows = []
+    
     for col in df.columns:
         s = df[col]
-        mode = s.mode()
 
-        base = {
+        # One value_counts call instead of mode() + value_counts()
+        vc = s.value_counts(dropna=True)
+
+        if len(vc):
+            top = vc.index[0]
+            freq = vc.iloc[0]
+        else:
+            top = None
+            freq = None
+
+        row = {
             "column": col,
-            "dtype": s.dtype,
-            "missing": s.isna().sum(),
-            "complete": s.count(),
-            "unique": s.nunique(),
-            "top": mode.iloc[0] if not mode.empty else None,
-            "freq": s.value_counts().iloc[0] if not s.empty else None,
+            **meta.loc[col].to_dict(),
+            "top": top,
+            "freq": freq,
         }
-        
-        if pd.api.types.is_numeric_dtype(s):
-            base.update({
-                "mean": s.mean(),
-                "std": s.std(),
-                "min": s.min(),
-                "p25": s.quantile(0.25),
-                "median": s.median(),
-                "p75": s.quantile(0.75),
-                "p99": s.quantile(0.99),
-                "max": s.max(),
-            })
-        
-        rows.append(base)
-    
+
+        if col in numeric_stats.index:
+            row.update(numeric_stats.loc[col].to_dict())
+
+        rows.append(row)
+
     return pd.DataFrame(rows)
 
 

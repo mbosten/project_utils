@@ -2,7 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import Iterable
-
+import sys
+import ast
 
 
 def tree(
@@ -82,3 +83,14 @@ def tree(
 
 
 __all__ = ["tree"]
+
+
+# To create a callgraph of a repo: 
+# uv run pyan3 --root "C:\Users\u863593\OneDrive - Tilburg University\Documents\PhD\Sandbox_code\slurm_alpha_complex_landscapes" "C:\Users\u863593\OneDrive - Tilburg University\Documents\PhD\Sandbox_code\slurm_alpha_complex_landscapes\src\preprolamu\**\*.py" -x "*/experiments/*" -x "*/tests/*" -x "*/example_plots.py" --dot --depth 1 --dot-ranksep 3 --colored --concentrate > callgraph-depth1.dot
+# Go to .dot file and specify nodesep=0.2, then run the function below
+# dot -Tsvg callgraph-depth1.dot > callgraph-depth1.svg
+
+
+# for example plots:
+# uv run pyan3 --root "C:\Users\u863593\OneDrive - Tilburg University\Documents\PhD\Sandbox_code\slurm_alpha_complex_landscapes" "C:\Users\u863593\OneDrive - Tilburg University\Documents\PhD\Sandbox_code\slurm_alpha_complex_landscapes\src\preprolamu\**\example_plots.py" -x "*/experiments/*" -x "*/tests/*" --dot --depth 2 --dot-ranksep 3 --concentrate > callgraph-exampleplots.dot
+# dot -Tsvg callgraph-exampleplots.dot > callgraph-exampleplots.svg
